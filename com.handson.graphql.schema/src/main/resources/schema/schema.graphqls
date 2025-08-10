@@ -1,0 +1,65 @@
+type Query {
+    query : Library!
+}
+
+type Library {
+    authors(names: [String!]): [Author!]
+    books: [Book!]
+    publishers: [Publisher!]
+    categories: [Category!]
+    users(names: [String!]): [User!]
+    reviews: [Review!]
+    orders: [Order!]
+}
+
+type Author {
+    id: ID!
+    name: String!
+    bio: String
+    books: [Book]
+}
+
+type Book {
+    id: ID!
+    title: String!
+    isbn: String!
+    publishedYear: Int
+    author: Author
+    publisher: Publisher
+}
+
+type Publisher {
+    id: ID!
+    name: String!
+    country: String
+    books: [Book]
+}
+
+type Category {
+    id: ID!
+    name: String!
+    description: String
+    books: [Book]
+}
+
+type User {
+    id: ID!
+    name: String!
+    email: String!
+    reviews: [Review]
+}
+
+type Review {
+    id: ID!
+    rating: Int!
+    comment: String
+    book: Book
+    user: User
+
+
+type Order {
+    id: ID!
+    user: User!
+    books: [Book]
+    orderDate: String
+}
