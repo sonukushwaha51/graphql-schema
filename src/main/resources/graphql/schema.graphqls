@@ -4,12 +4,19 @@ type Query {
 
 type Library {
     authors(ids: [Int!]): [Author!]
-    books: [Book!]
-    publishers: [Publisher!]
-    categories: [Category!]
-    users(names: [String!]): [User!]
-    reviews: [Review!]
-    orders: [Order!]
+    books(ids:[Int!]): [Book!]
+    publishers(ids:[Int!]): [Publisher!]
+    categories(ids:[Int!]): [Category!]
+    users(ids:[Int!]): [User!]
+    reviews(ids:[Int!]): [Review!]
+    orders(ids:[Int!]): [Order!]
+}
+
+type Mutation {
+    updateAuthors(authors : [AuthorUpdate], author: AuthorUpdate) : UpdateResponse
+    updatePublishers(publisher: PublisherUpdate, publishers: [PublisherUpdate]) : UpdateResponse
+    updateBooks(books: [BookUpdate], book: BookUpdate) : UpdateResponse
+    createReview(review : ReviewUpdate) : UpdateResponse
 }
 
 type Author {
@@ -39,22 +46,20 @@ type Category {
     id: ID!
     name: String!
     description: String
-    books: [Book]
 }
 
 type User {
     id: ID!
     name: String!
     email: String!
-    reviews: [Review]
+    reviews(userId: Int!): [Review]
 }
 
 type Review {
     id: ID!
     rating: Int!
     comment: String
-    book: Book
-    user: User
+    userId: Int!
 }
 
 type Order {
@@ -62,4 +67,41 @@ type Order {
     user: User!
     books: [Book]
     orderDate: String
+}
+
+type UpdateResponse {
+    status : Int!
+    message: String!
+    timestamp: Long
+}
+
+input AuthorUpdate {
+    id: ID!
+    name: String!
+    bio: String
+    book: book
+    books: [Book]
+}
+
+input BookUpdate {
+    id: ID!
+    title: String!
+    isbn: String!
+    publishedYear: Int
+    author: Author
+    publisher: Publisher
+}
+
+input PublisherUpdate {
+    id: ID!
+    name: String!
+    country: String
+    books: [Book]
+}
+
+input ReviewUpdate {
+    id: ID!
+    rating: Int!
+    comment: String
+    userId: Int!
 }
