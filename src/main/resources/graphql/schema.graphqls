@@ -60,6 +60,7 @@ type Review {
     rating: Int!
     comment: String
     userId: Int!
+    bookId: Int!
 }
 
 type Order {
@@ -104,4 +105,5 @@ input ReviewUpdate {
     rating: Int!
     comment: String
     userId: Int!
+    bookId: Int!
 }
