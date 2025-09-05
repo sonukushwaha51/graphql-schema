@@ -10,8 +10,8 @@
 
 `git checkout develop`
 
-`mvn gitflow release:start`
+`mvn gitflow:release-start`
 
 # Select release version and then 
 
-`mvn gitflow release:finish`
+`mvn gitflow:release-finish`
