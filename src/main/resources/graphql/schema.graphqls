@@ -53,7 +53,7 @@ type User {
     id: ID!
     name: String!
     email: String!
-    reviews(userId: Int!): [Review]
+    reviewsByUserIds: [Review]
 }
 
 type Review {
